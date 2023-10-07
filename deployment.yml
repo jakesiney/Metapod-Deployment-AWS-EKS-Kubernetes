@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: koala-deployment
+  labels:
+    app: koala
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: koala
+  template:
+    metadata:
+      labels:
+        app: koala
+    spec:
+      containers:
+      - name: koala
+        image: paulbouwer/hello-kubernetes:1.10
+        ports:
+        - containerPort: 8080

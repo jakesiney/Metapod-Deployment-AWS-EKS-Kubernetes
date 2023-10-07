@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: koala-ingress
+  annotations:
+    kubernetes.io/spec.ingressClassName: alb
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /koala1
+            pathType: Prefix
+            backend:
+              service:
+                name: koala-deployment
+                port:
+                  number: 8080
+    - http:
+        paths:
+          - path: /koalaworld
+            pathType: Prefix
+            backend:
+              service:
+                name: koalaworld
+                port:
+                  number: 5000
+  

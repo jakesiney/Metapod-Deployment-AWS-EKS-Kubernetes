@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: koalaworld-deployment
+  labels:
+    app: koalaworld
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: koalaworld
+  template:
+    metadata:
+      labels:
+        app: koalaworld
+    spec:
+      containers:
+      - name: koala
+        image: jakesiney/koalaworld
+        ports:
+        - containerPort: 5000

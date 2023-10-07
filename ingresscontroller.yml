@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-load-balancer-controller
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aws-load-balancer-controller
+  template:
+    metadata:
+      labels:
+        app: aws-load-balancer-controller
+    spec:
+      containers:
+        - name: aws-load-balancer-controller
+          image: amazon/aws-alb-ingress-controller:v2.3.0  # Check for the latest version
+          args:
+            - --ingress-class=alb
+            - --cluster-name=metapod-eks-IclszAmy
+          env:
+            - name: AWS_REGION
+              value: eu-west-2  # e.g., us-west-2
